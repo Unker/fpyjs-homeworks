@@ -21,9 +21,11 @@ while(!isQuit) {
         continue;
     } else if(numberToGuess === num) {
         alert(`Вы угадали с ${nTryToGuess} попытки`);
-        nTryToGuess = 1;
-    } else {
-        alert('Мимо!');
+        nTryToGuess = 0;
+    } else if (num > numberToGuess) {
+        alert('Меньше');
+    } else if (num < numberToGuess) {
+        alert('Больше');
     }
 
     nTryToGuess++;
