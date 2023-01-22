@@ -3,7 +3,7 @@ function getPrimeNumbers(amount) {
     console.log(`n=${n}`);
     const isValidAmount = Number.isInteger(n) & n > 0;
     if(!isValidAmount) {
-        console.log(`${amount} is not valid amount`);
+        console.error(`${amount} is not valid amount`);
         return;
     } else {
         let res = [];
@@ -21,7 +21,6 @@ function getPrimeNumbers(amount) {
             };
             if(isPrime) {
                 res.push(number);
-                console.log(`number: ${number}`)
             }
         } while(res.length<amount);
         return res;
