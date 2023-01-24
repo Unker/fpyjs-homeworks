@@ -1,4 +1,4 @@
-const verbose = false;
+const verbose = true;
 
 const goods = [
     /*
@@ -115,5 +115,6 @@ clearBasket()
 if(verbose) console.log("=-=-=-=-=-=-= After clearing=-=-=-=-=-=-= \n", basket)
 appendToBasket(goods[2])
 appendToBasket(goods[4],3)
+appendToBasket(goods[4],1)
 if(verbose) console.log("=-=-=-=-=-=-= Add good=-=-=-=-=-=-= \n", basket)
 console.log(calcTotalsFromBasket())
