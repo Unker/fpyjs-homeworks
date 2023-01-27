@@ -1,4 +1,4 @@
-const verbose = true;
+const verbose = false;
 
 const goods = [
     /*
@@ -59,7 +59,7 @@ const goods = [
     },
 ]
 
-const basket = [
+let basket = [
     /*
     good           ссылка на товар в каталоге
     amount         количество товара в корзине
@@ -83,11 +83,8 @@ function appendToBasket(good, amount=1) {
 }
 
 // функция удаления одного товара из корзины
-function delFromBasket(good, amount=1) {
-    basket.push({
-        good:good,
-        amount:amount,
-    })
+function delFromBasket(good) {
+    basket = basket.filter(elem => elem.good !== good);
 }
 
 // функция полной очистки корзины
@@ -117,4 +114,9 @@ appendToBasket(goods[2])
 appendToBasket(goods[4],3)
 appendToBasket(goods[4],1)
 if(verbose) console.log("=-=-=-=-=-=-= Add good=-=-=-=-=-=-= \n", basket)
+
+if(verbose) console.log("=-=-=-=-=-=-= Before del=-=-=-=-=-=-= \n", basket)
+delFromBasket(goods[2])
+if(verbose) console.log("=-=-=-=-=-=-= After del=-=-=-=-=-=-= \n", basket)
+
 console.log(calcTotalsFromBasket())
