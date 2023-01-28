@@ -101,7 +101,7 @@ class Basket {
     add(good, amount) {
         // проверяем наличие товара в корзине
         let index = this.goods.indexOf(good)
-        if (index>=0){
+        if (index>=0) {
             console.log("change amount")
             this.goods[index].amount += amount;
         } 
@@ -109,9 +109,20 @@ class Basket {
             console.log("push item")
             good.amount = amount;
             this.goods.push(good);
-
         }
     }    
+
+    // Уменьшает количество товара в корзине, если количество становится равным нулю, товар удаляется
+    remove(good, amount) {
+        // проверяем наличие товара в корзине
+        let index = this.goods.indexOf(good);
+        if (index>=0) {
+            this.goods[index].amount -= amount;
+            // удалим товар при необходимости
+            if (this.goods[index].amount<=0) this.goods.splice(index, 1);
+        }
+    }
+
 
 }
 
@@ -173,6 +184,8 @@ basket = new Basket([bg1, bg3])
 console.log(basket)
 basket.add(bg4, amount=2)
 basket.add(bg1, amount=3)
+console.log(basket)
+basket.add(bg1, amount=2)
 console.log(basket)
 
 
