@@ -123,6 +123,16 @@ class Basket {
         }
     }
 
+    // Очищает содержимое корзины
+    clear() {
+        this.goods.splice(0,this.goods.length);
+    }       
+    
+    // Удаляет из корзины товары, имеющие признак available === false (использовать filter())
+    removeUnavailable() {
+        this.goods = this.goods.filter( good => good.available === true )
+    }
+
 
 }
 
@@ -174,6 +184,7 @@ bg1 = new BasketGood(good1)
 
 // bg2 = new BasketGood(123)
 // console.log(bg2)
+bg2 = new BasketGood(good2)
 
 bg3 = new BasketGood(good3)
 bg3.amount=10
@@ -181,16 +192,23 @@ bg3.amount=10
 bg4 = new BasketGood(good4)
 
 basket = new Basket([bg1, bg3])
-console.log(basket)
-basket.add(bg4, amount=2)
-basket.add(bg1, amount=3)
-console.log(basket)
-basket.add(bg1, amount=2)
-console.log(basket)
+// console.log(basket)
+// basket.add(bg4, amount=2)
+// basket.add(bg1, amount=3)
+// console.log("Add goods\n", basket)
+// basket.remove(bg1, amount=2)
+// console.log("Remove good\n", basket)
+// basket.remove(bg1, amount=2)
+// console.log("Remove good\n", basket)
+// basket.remove(bg2, amount=2)
+// console.log("Remove good\n", basket)
 
+// basket.clear()
+// console.log("Clear basket\n", basket)
 
+// basket.removeUnavailable()
+// console.log("removeUnavailable in basket\n", basket)
 
-
-
-// console.log(`totalAmount in basket =`, basket.totalAmount)
-// console.log(`totalSum in basket =`, basket.totalSum)
+console.log('filtered GoodsList\n', gl1.list)
+console.log(`totalAmount in basket =`, basket.totalAmount)
+console.log(`totalSum in basket =`, basket.totalSum)
