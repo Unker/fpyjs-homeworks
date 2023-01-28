@@ -117,8 +117,8 @@ gl2.add(good6)
 id4 = good4.id
 gl1.remove(id4)
 
-// console.log(gl1.list)
-// console.log(gl2.list)
+console.log(gl1.list)
+console.log(gl2.list)
 
 bg1 = new BasketGood(good1)
 
