@@ -1,3 +1,5 @@
+const e = require("express");
+
 class Good {
     /*
     id            Код товара
@@ -13,7 +15,7 @@ class Good {
         this.sizes = sizes;
         this.price = price;
         this.available = available;
-       this.id = id;
+        this.id = id;
     }
 
     setAvailable(isAvailable) {
@@ -73,8 +75,44 @@ class BasketGood extends Good {
                 available   =good.available,
             )
             this.amount = 1;
+        } else {
+            throw new Error(`parameter 'good' is not instance of ${Good}`);
         }
     }
+}
+
+// класс для хранения данных о корзине товаров со свойствами
+class Basket {
+    constructor (goods) {
+        this.goods = goods;
+    }
+
+    // возвращает общее количество товаров в корзине
+    get totalAmount() {
+        return this.goods.reduce( (sum, current ) => sum.amount + current.amount );
+    }
+        
+    // возвращает общую стоимость товаров в корзине
+    get totalSum() {
+        return this.goods.reduce( (sum, current ) => sum.amount*sum.price + current.amount*current.price );
+    }   
+
+    // Добавляет товар в корзину, если товар уже есть увеличивает количество
+    add(good, amount) {
+        // проверяем наличие товара в корзине
+        let index = this.goods.indexOf(good)
+        if (index>=0){
+            console.log("change amount")
+            this.goods[index].amount += amount;
+        } 
+        else {
+            console.log("push item")
+            good.amount = amount;
+            this.goods.push(good);
+
+        }
+    }    
+
 }
 
 const good1 = new Good(id=1, name="good1a",description="asd", sizes=[1,2,3], price=123.3);
@@ -117,9 +155,29 @@ gl2.add(good6)
 id4 = good4.id
 gl1.remove(id4)
 
-console.log(gl1.list)
-console.log(gl2.list)
+// console.log(gl1.list)
+// console.log(gl2.list)
 
 bg1 = new BasketGood(good1)
+// console.log(bg1)
 
-console.log(bg1)
+// bg2 = new BasketGood(123)
+// console.log(bg2)
+
+bg3 = new BasketGood(good3)
+bg3.amount=10
+// console.log(bg3)
+bg4 = new BasketGood(good4)
+
+basket = new Basket([bg1, bg3])
+console.log(basket)
+basket.add(bg4, amount=2)
+basket.add(bg1, amount=3)
+console.log(basket)
+
+
+
+
+
+// console.log(`totalAmount in basket =`, basket.totalAmount)
+// console.log(`totalSum in basket =`, basket.totalSum)

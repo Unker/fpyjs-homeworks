@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/2/Task_2.1/prime.js",
+            "program": "${workspaceFolder}/3/oop.js",
             "args": ["7"]
         }
     ]
