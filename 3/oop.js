@@ -66,14 +66,7 @@ class GoodsList {
 class BasketGood extends Good {
     constructor (good) {
         if (good instanceof Good) {
-            super(
-                id          =good.id,
-                name        =good.name,
-                description =good.description,
-                sizes       =good.sizes,
-                price       =good.price,
-                available   =good.available,
-            )
+            super(good.id, good.name, good.description, good.sizes, good.price, good.available)
             this.amount = 1;
         } else {
             throw new Error(`parameter 'good' is not instance of ${Good}`);
@@ -89,26 +82,31 @@ class Basket {
 
     // возвращает общее количество товаров в корзине
     get totalAmount() {
-        return this.goods.reduce( (sum, current ) => sum.amount + current.amount );
+        return this.goods.reduce( (sum, current ) => {
+            return sum + current.amount
+        }, 0 );
     }
         
     // возвращает общую стоимость товаров в корзине
     get totalSum() {
-        return this.goods.reduce( (sum, current ) => sum.amount*sum.price + current.amount*current.price );
+        return this.goods.reduce( (sum, current ) => {
+            return sum + current.amount*current.price
+        }, 0);
     }   
 
     // Добавляет товар в корзину, если товар уже есть увеличивает количество
     add(good, amount) {
         // проверяем наличие товара в корзине
-        let index = this.goods.indexOf(good)
-        if (index>=0) {
+        let goodInBasket = this.goods.filter(item => item.id == good.id)[0]
+        if (goodInBasket) {
             console.log("change amount")
-            this.goods[index].amount += amount;
+            goodInBasket.amount += amount;
         } 
         else {
+            let basketGood = new BasketGood(good)
             console.log("push item")
-            good.amount = amount;
-            this.goods.push(good);
+            basketGood.amount = amount;
+            this.goods.push(basketGood);
         }
     }    
 
@@ -192,9 +190,8 @@ bg3.amount=10
 bg4 = new BasketGood(good4)
 
 basket = new Basket([bg1, bg3])
-// console.log(basket)
-// basket.add(bg4, amount=2)
-// basket.add(bg1, amount=3)
+basket.add(good1, amount=3)
+basket.add(good4, amount=2)
 // console.log("Add goods\n", basket)
 // basket.remove(bg1, amount=2)
 // console.log("Remove good\n", basket)
@@ -210,5 +207,6 @@ basket = new Basket([bg1, bg3])
 // console.log("removeUnavailable in basket\n", basket)
 
 console.log('filtered GoodsList\n', gl1.list)
+console.log(basket)
 console.log(`totalAmount in basket =`, basket.totalAmount)
 console.log(`totalSum in basket =`, basket.totalSum)
