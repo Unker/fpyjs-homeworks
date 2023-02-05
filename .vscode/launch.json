@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/3/oop.js",
+            "program": "${workspaceFolder}/4/password.js",
             "args": ["7"]
         }
     ]
